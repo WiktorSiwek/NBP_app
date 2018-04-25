@@ -10,6 +10,8 @@ class AppDashboard extends Component {
     super(props);
     this.state = {
       table: '',
+      howMany: '',
+      whichOne: ''
     }
   }
 
@@ -18,16 +20,7 @@ class AppDashboard extends Component {
       method: 'GET',
     })
       .then(res => res.json())
-      .then(res => {console.log(res[0].rates[0])
-        return res}
-    )
       .then(res => {
-        console.log(res[0].rates)
-        // this.setState({
-        //   table: res[0].rates.map(r => (
-        //   <div>{r.currency}-{r.code}-{r.bid}-{r.ask} </div>
-        // ))
-        // })
         this.setState({
           table: res[0].rates.map(el => {
             return(
@@ -45,10 +38,36 @@ class AppDashboard extends Component {
       })
   }
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("submited!")
+  }
+
+  handleHowMany = (e) => {
+    this.setState({
+      howMany: e.target.value
+    })
+    console.log("amount")
+  }
+
+  handleWhichOne = (e) => {
+    this.setState({
+      whichOne: e.target.value
+    })
+    console.log("which")
+  }
+
   render() {
     return (
       <div>
+        <Header />
         {this.state.table}
+        <ChooseCurrency 
+          handleSubmit={this.handleSubmit}
+          handleHowMany={this.handleHowMany}
+          handleWhichOne={this.handleWhichOne}
+          howMany={this.state.howMany}
+          whichOne={this.state.whichOne} />
       </div>
     )
   }
@@ -70,15 +89,23 @@ const Header = () => {
 }
 
 class ChooseCurrency extends Component {
+
   render() {
     return (
       <div>
-        <form>
+        <form onSubmit={this.props.handleSubmit}>
           <label htmlFor="amountOfCurriencies">Ile kursów chcesz wyświetlić?</label>
-          <input id="amountOfCurriencies" type="text"/>
+          <input value={this.props.howMany} 
+                 onChange={this.props.handleHowMany} 
+                 id="amountOfCurriencies" 
+                 type="number"/>
           <br/>
           <label htmlFor="whichCurrency">Jaka waluta?</label>
-          <input id="whichCurrency" type="text"/>
+          <input type="text" 
+                 value={this.props.whichOne} 
+                 onChange={this.props.handleWhichOne} 
+                 id="whichCurrency" />
+          <button type="submit" style={{ display: "none"}}></button>
         </form>
       </div>
     )
@@ -89,9 +116,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header />
         <AppDashboard />
-        <ChooseCurrency />
       </div>
     );
   }
