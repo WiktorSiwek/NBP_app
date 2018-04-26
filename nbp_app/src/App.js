@@ -34,10 +34,12 @@ class AppDashboard extends Component {
   settingWhole = (res) => {
     this.setState({
       table: res[0].rates.map(el => {
-        return (<Table col1={el.currency}
-                       col2={el.code} 
-                       col3={el.ask}
-                       col4={el.bid} />)
+        return (
+          <Table col1={el.currency}
+                 col2={el.code} 
+                 col3={el.ask}
+                 col4={el.bid} />
+               )
       })
     })
   }
@@ -45,18 +47,12 @@ class AppDashboard extends Component {
   settingSingle = (res) => {
     this.setState({
       table: res.rates.map(el => {
-        return(
-        <table>
-          <tbody>
-            <tr>
-              <td>{el.no}</td>
-              <td>{el.effectiveDate}</td>
-              <td>{el.bid}</td>
-              <td>{el.ask}</td>
-            </tr>
-          </tbody>
-        </table>
-        )
+        return ( 
+          <Table col1={el.no}
+                 col2={el.effectiveDate} 
+                 col3={el.ask}
+                 col4={el.bid} />
+               )
       }),
       singleCurrencyMode: true
     })
@@ -64,8 +60,8 @@ class AppDashboard extends Component {
 
   changeHeaders = () => {
     this.setState({
-      col1: this.state.singleCurrencyMode ? "Kod zmiany" : "Nazwa waluty",
-      col3: this.state.singleCurrencyMode ? "Data stanu" : "Skrót"
+      col1Header: this.state.singleCurrencyMode ? "Kod zmiany" : "Nazwa waluty",
+      col2Header: this.state.singleCurrencyMode ? "Data stanu" : "Skrót"
     })
   }
 
@@ -101,6 +97,7 @@ class AppDashboard extends Component {
   render() {
     return (
       <div>
+        <Clock />
         <Header col1={this.state.col1Header}
                 col2={this.state.col2Header} />
         {this.state.table}
@@ -194,7 +191,6 @@ class Table extends Component {
   }
 }
 
-
 class App extends Component {
   render() {
     return (
@@ -202,6 +198,36 @@ class App extends Component {
         <AppDashboard />
       </div>
     );
+  }
+}
+
+class Clock extends Component {
+  state = {
+    time: new Date().toLocaleString(),
+  };
+
+  componentDidMount() {
+    this.intervalID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+  componentWillUnmount() {
+    clearInterval(this.intervalID);
+  }
+
+  tick() {
+    this.setState({
+      time: new Date().toLocaleString()
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <p>{this.state.time}</p>
+      </div>
+    )
   }
 }
 
