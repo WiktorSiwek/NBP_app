@@ -10,9 +10,7 @@ import App from '../App'
 class Header extends Component {
     render() {
       return (
-        <div>
-          <table style={{fontWeight: "bold"}}>
-            <tbody>
+            <tbody style={{backgroundColor:"#ccc", fontWeight: "bold", fontSize: "15px"}}>
               <tr>
                 <td>{this.props.col1}</td>
                 <td>{this.props.col2}</td>
@@ -20,8 +18,6 @@ class Header extends Component {
                 <td>Cena kupna</td>
               </tr>
             </tbody>
-          </table> 
-        </div>
       )
     }
   }

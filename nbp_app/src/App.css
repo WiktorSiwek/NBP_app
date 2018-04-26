@@ -28,26 +28,4 @@
 }
 
 
-tr {
-  height: 40px;
-}
-
-td {
-  width: 100px;
-  border: 1px solid black;
-  table-layout: fixed;
-  text-align: center
-}
-
-form {
-  margin-top: 20px;
-  width: 70%;
-  justify-content: space-between;
-}
-
-input {
-  left: inherit;
-}
-
-
 

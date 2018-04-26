@@ -76,7 +76,12 @@ class AppDashboard extends Component {
         .then(res => {
           this.settingSingle(res);
         })
-        .then(this.changeHeaders);
+        .then(this.changeHeaders)
+        .catch(err => alert("Niepoprawne dane! Spróbuj ponownie"))
+        .then(this.setState({
+          howMany: '',
+          whichOne: ''
+        }))
     };
   
     handleHowMany = (e) => {
@@ -97,23 +102,28 @@ class AppDashboard extends Component {
       this.fetching(API_WHOLE).then(res => {
         this.settingWhole(res);
       });
+      this.setState({
+        singleCurrencyMode: false,
+      })
     }
   
     render() {
       return (
-        <div>
+        <div className="col-lg-1 col-centered">
           <Clock />
-          <Header col1={this.state.col1Header}
-                  col2={this.state.col2Header} />
-          {this.state.table}
+          <table className="table-bordered table-hover table-condensed w-75">
+            <Header col1={this.state.col1Header}
+                    col2={this.state.col2Header} />
+            {this.state.table}
+          </table>
           <ChooseCurrency 
             handleSubmit={this.handleSubmit}
             handleHowMany={this.handleHowMany}
             handleWhichOne={this.handleWhichOne}
             howMany={this.state.howMany}
             whichOne={this.state.whichOne} />
-            <ReturnButton state={this.state.singleCurrencyMode}
-                          handleReturn={this.handleReturn}/>
+          <ReturnButton state={this.state.singleCurrencyMode}
+                        handleReturn={this.handleReturn}/>
         </div>
       )
     }

@@ -10,7 +10,7 @@ import App from '../App'
 class ReturnButton extends Component {
     render() {
       return (
-        <div>
+        <div className="btn">
           {
             (this.props.state)
               ? <button onClick={this.props.handleReturn}>Powrót do listy walut</button> 

@@ -9,7 +9,7 @@ import App from '../App'
 
 class Clock extends Component {
     state = {
-      time: new Date().toLocaleString(),
+      time: new Date().toLocaleTimeString(),
     };
   
     componentDidMount() {
@@ -24,14 +24,14 @@ class Clock extends Component {
   
     tick() {
       this.setState({
-        time: new Date().toLocaleString()
+        time: new Date().toLocaleTimeString()
       });
     }
   
     render() {
       return (
         <div>
-          <p>{this.state.time}</p>
+          <p className="font-weight-bold" style={{fontSize: "30px"}}>{this.state.time}</p>
         </div>
       )
     }

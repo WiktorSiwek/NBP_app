@@ -10,18 +10,14 @@ import App from '../App'
 class Table extends Component {
     render() {
       return (
-        <div>
-          <table>
             <tbody>
-              <tr>
-                <td>{this.props.col1}</td>
-                <td>{this.props.col2}</td>
-                <td>{this.props.col3}</td>
-                <td>{this.props.col4}</td>
+              <tr style={{height:"50px"}}>
+                <td className="w-25">{this.props.col1}</td>
+                <td className="w-25">{this.props.col2}</td>
+                <td className="w-25">{this.props.col3}</td>
+                <td className="w-25">{this.props.col4}</td>
               </tr>
             </tbody>
-          </table>
-        </div>
       )
     }
   }
